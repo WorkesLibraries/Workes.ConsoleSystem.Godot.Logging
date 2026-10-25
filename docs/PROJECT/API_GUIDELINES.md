@@ -1,45 +1,9 @@
-# API GUIDELINES
+# API Guidelines
 
-## Purpose
+Construct `GodotLogAttachment(manager, levelMapper)` after Godot starts; construction registers the custom logger. Keep the attachment and dispose it before runtime shutdown. The caller retains ownership of the manager.
 
-Describe the design philosophy and conventions for the package's public API.
+The optional `Func<GodotLogKind, LogLevel?>` selects the ConsoleSystem severity; `null` means ignore. `GodotLogMapper.DefaultMap` exposes the built-in policy. The kind identifies the Godot callback, not a universal severity: ScriptError and ShaderError default to Critical, while ErrorStream defaults to Error.
 
-This is a project-control document for keeping the public API consistent. It is not intended to be an exhaustive public API reference.
+Entries preserve available message and location information. Engine errors use rationale when available or code otherwise, with file/line/function in source metadata. The callback API provides no .NET exception object.
 
-## Usage
-
-Use this file before changing public-facing types, method names, configuration flows, extension points, or usage patterns.
-
-## Maintenance
-
-Update when the project's API design principles, naming conventions, consistency rules, or overall API philosophy changes.
-
-## Rules
-
-- Document API design intent, not every public member.
-- Separate stable API principles from experimental ideas.
-- Include short examples of preferred API shape when useful.
-- Keep README examples aligned with the normal workflow and explicit package-version installation style.
-- Do not document private implementation details here.
-- Do not use this as a task list.
-
-## API Design Principles
-
-To be written.
-
-## Naming And Structure
-
-To be written.
-
-## Configuration Style
-
-To be written.
-
-## Error Handling And Validation
-
-To be written.
-
-## Examples Of Preferred API Shape
-
-To be written.
-
+Callbacks may be concurrent. The adapter serializes forwarding, but history notifications still run synchronously on the callback thread. Keep mapping delegates deterministic and non-throwing; consumers marshal their own UI and should not call Godot logging APIs from history callbacks.

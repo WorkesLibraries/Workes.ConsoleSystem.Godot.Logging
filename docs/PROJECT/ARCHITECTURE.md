@@ -1,40 +1,15 @@
-# ARCHITECTURE
+# Architecture
 
-## Purpose
+## Boundary
 
-Describe how the project is structured internally and how the main systems relate to each other.
+A Godot C# logger adapter that forwards callbacks to a caller-owned ConsoleSystem manager. The package targets .NET 8, uses GodotSharp 4.7.2, and depends on ConsoleSystem 0.9.0. Godot.SourceGenerators 4.7.2 is private to the build.
 
-This is a project-control document for maintaining architectural consistency. It is not intended to replace focused user documentation under docs/.
+## Flow
 
-## Usage
+`GodotLogAttachment` registers an internal `Godot.Logger` with `OS.Singleton`. The logger translates message and error callbacks into `GodotLogKind`, derives message/source data, and calls an internal forwarder. The forwarder applies the default or supplied nullable mapping and records a `LogEntry` through `ConsoleManager.RecordEntry`.
 
-Use this file to understand the internal design before making structural changes.
+Defaults are Information for standard output, Error for stderr and engine errors, Warning for engine warnings, and Critical for script/shader errors. Error messages prefer rationale, then error code; file, line, and function details become source metadata.
 
-## Maintenance
+## Threading And Lifetime
 
-Update when the internal structure, core abstractions, dependency flow, or major implementation strategy changes.
-
-## Rules
-
-- Explain current architecture, not wishful future architecture.
-- Prefer clear sections and diagrams when useful.
-- Link to DECISIONS.md when architectural choices need rationale.
-- Do not use this as a task list.
-- Do not treat this as exhaustive user documentation.
-
-## Current Architecture
-
-To be written.
-
-## Main Components
-
-To be written.
-
-## Data Flow / Control Flow
-
-To be written.
-
-## Important Constraints
-
-To be written.
-
+Godot may call the logger concurrently on worker threads. Forwarding is serialized and does not call Godot back from the callback. Construct after runtime startup and dispose before shutdown. Disposal unregisters the logger and releases the manager reference, but does not dispose the manager. Godot supplies no .NET exception instance, and the adapter does not marshal UI work.
