@@ -1,0 +1,18 @@
+<Project>
+  <PropertyGroup Condition="$([MSBuild]::VersionGreaterThanOrEquals('$(MSBuildVersion)', '17.3'))">
+    <!-- Godot.NET.Sdk 4.7 checks MSBuildAssemblyVersion (17.0 on newer MSBuild) before encoding paths for source generators. -->
+    <GodotProjectDirBase64>$([MSBuild]::ConvertToBase64('$(GodotProjectDir)'))</GodotProjectDirBase64>
+  </PropertyGroup>
+
+  <Target Name="GodotProjectDir" BeforeTargets="Build">
+    <!-- Godot.NET.Sdk 4.7 compares the fixed MSBuild assembly version (17.0) instead of MSBuildVersion. -->
+    <Error Text="Godot.NET.Sdk requires MSBuild 17.3+ for this project path."
+           Condition="$([MSBuild]::VersionLessThan('$(MSBuildVersion)', '17.3')) and $(GodotProjectDir.Contains('%23'))" />
+    <Error Text="Godot.NET.Sdk cannot build from this project path on this MSBuild version."
+           Condition="$([MSBuild]::VersionLessThan('$(MSBuildVersion)', '17.3')) and $(GodotProjectDir.Contains('%3B'))" />
+    <Error Text="Godot.NET.Sdk cannot build from a path containing a newline on this MSBuild version."
+           Condition="$([MSBuild]::VersionLessThan('$(MSBuildVersion)', '17.3')) and $(GodotProjectDir.Contains('%0A'))" />
+    <Error Text="Godot.NET.Sdk cannot build from a path containing a newline on this MSBuild version."
+           Condition="$([MSBuild]::VersionLessThan('$(MSBuildVersion)', '17.3')) and $(GodotProjectDir.Contains('%0D'))" />
+  </Target>
+</Project>

@@ -6,14 +6,17 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <LangVersion>10.0</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GodotProjectDir Condition=" '$(GodotProjectDir)' == '' ">$(MSBuildProjectDirectory)</GodotProjectDir>
+    <GodotProjectDir>$([MSBuild]::EnsureTrailingSlash('$(GodotProjectDir)'))</GodotProjectDir>
+    <GodotProjectDirBase64 Condition="$([MSBuild]::VersionGreaterThanOrEquals('$(MSBuildVersion)', '17.3'))">$([MSBuild]::ConvertToBase64('$(GodotProjectDir)'))</GodotProjectDirBase64>
     <PackageId>Workes.ConsoleSystem.Godot.Logging</PackageId>
-    <Version>0.1.0</Version>
-    <PackageReleaseNotes>Initial Godot custom Logger attachment with configurable severity mapping, source metadata, and disposal-safe forwarding.</PackageReleaseNotes>
+    <Version>1.0.0</Version>
+    <PackageReleaseNotes>Initial stable release of the thread-safe Godot custom logger adapter, verified with Godot 4.7.2.</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Workes</Authors>
     <Company>Workes</Company>
     <Product>Workes.ConsoleSystem.Godot.Logging</Product>
-    <Description>Optional Godot 4.7+ logger adapter for Workes.ConsoleSystem.</Description>
+    <Description>Optional Godot 4.7.2 C# logger adapter for Workes.ConsoleSystem.</Description>
     <PackageTags>godot logging console logging-adapter</PackageTags>
     <PackageProjectUrl>https://github.com/WorkesLibraries/Workes.ConsoleSystem.Godot.Logging</PackageProjectUrl>
     <RepositoryUrl>https://github.com/WorkesLibraries/Workes.ConsoleSystem.Godot.Logging.git</RepositoryUrl>
@@ -31,5 +34,6 @@
   <ItemGroup>
     <PackageReference Include="Workes.ConsoleSystem" Version="0.9.0" />
     <PackageReference Include="GodotSharp" Version="4.7.2" />
+    <PackageReference Include="Godot.SourceGenerators" Version="4.7.2" PrivateAssets="all" />
   </ItemGroup>
 </Project>
