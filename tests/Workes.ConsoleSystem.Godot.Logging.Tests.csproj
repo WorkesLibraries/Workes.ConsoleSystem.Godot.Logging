@@ -20,6 +20,6 @@
   <ItemGroup></ItemGroup>
   <ItemGroup>
     <Compile Include="..\src\GodotLogPrimitives.cs" Link="GodotLogPrimitives.cs" />
-    <PackageReference Include="Workes.ConsoleSystem" Version="0.9.0" />
+    <PackageReference Include="Workes.ConsoleSystem" Version="1.0.0" />
   </ItemGroup>
 </Project>

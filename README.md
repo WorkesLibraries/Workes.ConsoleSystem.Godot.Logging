@@ -7,14 +7,14 @@ An opt-in Godot C# custom logger that forwards Godot's supported log callbacks t
 Install from [NuGet](https://www.nuget.org/packages/Workes.ConsoleSystem.Godot.Logging):
 
 ```bash
-dotnet add package Workes.ConsoleSystem.Godot.Logging --version 1.0.0
+dotnet add package Workes.ConsoleSystem.Godot.Logging --version 1.1.0
 ```
 
 ```xml
-<PackageReference Include="Workes.ConsoleSystem.Godot.Logging" Version="1.0.0" />
+<PackageReference Include="Workes.ConsoleSystem.Godot.Logging" Version="1.1.0" />
 ```
 
-The package targets .NET 8 and is built against GodotSharp 4.7.2. It depends on Workes.ConsoleSystem 0.9.0; Godot.SourceGenerators 4.7.2 is a private build dependency. Use the Godot 4.7.2 .NET edition.
+The package targets .NET 8 and is built against GodotSharp 4.7.2. It depends on Workes.ConsoleSystem 1.0.0; Godot.SourceGenerators 4.7.2 is a private build dependency. Use the Godot 4.7.2 .NET edition.
 
 ## Usage
 

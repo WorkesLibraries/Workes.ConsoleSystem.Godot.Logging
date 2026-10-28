@@ -2,7 +2,7 @@
 
 ## Boundary
 
-A Godot C# logger adapter that forwards callbacks to a caller-owned ConsoleSystem manager. The package targets .NET 8, uses GodotSharp 4.7.2, and depends on ConsoleSystem 0.9.0. Godot.SourceGenerators 4.7.2 is private to the build.
+A Godot C# logger adapter that forwards callbacks to a caller-owned ConsoleSystem manager. The package targets .NET 8, uses GodotSharp 4.7.2, and depends on ConsoleSystem 1.0.0. Godot.SourceGenerators 4.7.2 is private to the build.
 
 ## Flow
 

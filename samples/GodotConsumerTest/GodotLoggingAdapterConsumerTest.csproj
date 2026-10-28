@@ -6,6 +6,6 @@
     <RootNamespace>GodotLoggingAdapterConsumerTest</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Workes.ConsoleSystem.Godot.Logging" Version="1.0.0" />
+    <PackageReference Include="Workes.ConsoleSystem.Godot.Logging" Version="1.1.0" />
   </ItemGroup>
 </Project>

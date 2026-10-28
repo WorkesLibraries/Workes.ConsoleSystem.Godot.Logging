@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.0] - 28-10-2026
+
+- Updated the Workes.ConsoleSystem dependency to 1.0.0; adapter behavior and public API are unchanged.
+
 ## [1.0.0] - 25-10-2026
 
 - Added a stable, disposable Godot custom logger attachment with configurable severity mapping and source-location metadata.
